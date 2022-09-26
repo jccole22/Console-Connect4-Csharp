@@ -6,54 +6,45 @@
 
 Connect4Game game = new Connect4Game();
 
-game.MakePlay(0, 'X');
-game.MakePlay(0, 'O');
-game.MakePlay(1, 'X');
-game.MakePlay(1, 'O');
-game.MakePlay(2, 'X');
-game.MakePlay(2, 'O');
-game.MakePlay(3, 'X');
-game.MakePlay(3, 'O');
-game.MakePlay(4, 'X');
-game.MakePlay(4, 'O');
-game.MakePlay(5, 'X');
-game.MakePlay(5, 'O');
-game.MakePlay(6, 'X');
-game.MakePlay(6, 'O');
-game.PrintBoard();
 
 
+bool gameOver = false;
+int input;
 
+while (gameOver == false)
+{
+    Console.WriteLine($"Player-{game.currentPlayer} please enter column number:");
 
+    input = Convert.ToInt32(Console.ReadLine());
 
+    if (game.CheckColumn(input-1))
+    {
+        game.MakePlay(input-1, game.currentPlayer);
 
+        Console.WriteLine(game.BoardToString());
 
+        if (game.CheckWin(game.currentPlayer))
+        {
+            Console.WriteLine($"Player-{game.currentPlayer} wins!");
+            break;
+        }
 
+        if (game.CheckNumPlays() == false)
+        {
+            Console.WriteLine("Game has ended in a draw!");
+            break;
+        }
 
+        game.SwitchPlayer();
+    }
+    else 
+    {
+        Console.WriteLine("That column is full!");
+    }
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
